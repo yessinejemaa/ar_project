@@ -78,8 +78,7 @@ public class PhotoCapture : MonoBehaviour
     {
         
         yield return new WaitForEndOfFrame();
-        viewingPhotos = false;
-        photoFrame.SetActive(false);
+      
         
         Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
@@ -100,6 +99,8 @@ public class PhotoCapture : MonoBehaviour
 
         UI.SetActive(true);
         cameraUI.SetActive(true);
+        viewingPhotos = false;
+        photoFrame.SetActive(false);
 
     }
     void ShowPhoto()
