@@ -27,4 +27,13 @@ public class menu_management : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+    public void CaptureObjectScene()
+    {
+        SceneManager.LoadScene("Screenshot2");
+    }
+    public void TextObjectScene()
+    {
+        SceneManager.LoadScene("TestCamera");
+    }
+    
 }
