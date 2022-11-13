@@ -76,9 +76,10 @@ public class PhotoCapture : MonoBehaviour
     }
     IEnumerator ScreenshotP()
     {
+        
+        yield return new WaitForEndOfFrame();
         viewingPhotos = false;
         photoFrame.SetActive(false);
-        yield return new WaitForEndOfFrame();
         
         Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
@@ -89,13 +90,13 @@ public class PhotoCapture : MonoBehaviour
         string name = "Screenshot_ARapp" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
 
         //PC
-        byte[] bytes = texture.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/" + name, bytes);
+        //byte[] bytes = texture.EncodeToPNG();
+        //File.WriteAllBytes(Application.dataPath + "/" + name, bytes);
 
 
         //Mobile 
-        //NativeGallery.SaveImageToGallery(texture, "Myapp Picture", name);
-        //Destroy(texture);
+        NativeGallery.SaveImageToGallery(texture, "Myapp Picture", name);
+        Destroy(texture);
 
         UI.SetActive(true);
         cameraUI.SetActive(true);
