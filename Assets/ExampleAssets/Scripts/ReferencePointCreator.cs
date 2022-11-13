@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.UI;
 
 //
 // This script allows us to create reference points with
@@ -17,6 +18,7 @@ public class ReferencePointCreator : MonoBehaviour
     // This is the prefab that will appear every time a reference point is created.
     [SerializeField]
     GameObject m_ReferencePointPrefab;
+    public Button ColorButton;
 
     public GameObject referencePointPrefab
     {
@@ -82,7 +84,9 @@ public class ReferencePointCreator : MonoBehaviour
                 {
                     // Stores the reference point so that it may be removed later.
                     m_ReferencePoints.Add(referencePoint);
-                    Debug.Log("aaded to the scene");
+                    ColorButton.gameObject.SetActive(true);
+                    //Maki
+                    Handheld.Vibrate();
                 }
             }
             else
