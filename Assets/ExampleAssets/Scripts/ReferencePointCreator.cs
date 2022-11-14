@@ -17,14 +17,21 @@ public class ReferencePointCreator : MonoBehaviour
 {
     // This is the prefab that will appear every time a reference point is created.
     [SerializeField]
-    GameObject m_ReferencePointPrefab;
-    public Button ColorButton;
+    GameObject[] m_ReferencePointPrefab;
+    public GameObject ColorButton;
+    static bool setObject = false;
+    public Button deletButton;
 
-    public GameObject referencePointPrefab
+
+    public void setObjectMethod()
+    {
+        setObject = !setObject;
+    }
+   /* public GameObject referencePointPrefab
     {
         get => m_ReferencePointPrefab;
         set => m_ReferencePointPrefab = value;
-    }
+    }*/
 
     // Removes all the reference points that have been created.
     public void RemoveAllReferencePoints()
@@ -50,51 +57,63 @@ public class ReferencePointCreator : MonoBehaviour
 
     void Update()
     {
-        // If there is no tap, then simply do nothing until the next call to Update().
-        if (Input.touchCount == 0)
-            return;
 
-        var touch = Input.GetTouch(0);
-        if (touch.phase != TouchPhase.Began)
-            return;
 
-        if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
+        if (setObject)
         {
-            // Raycast hits are sorted by distance, so the first one
-            // will be the closest hit.
-            var hitPose = s_Hits[0].pose;
-            var hitTrackableId = s_Hits[0].trackableId;
-            var hitPlane = m_PlaneManager.GetPlane(hitTrackableId);
+            if (Input.touchCount == 0)
+                return;
 
-            // This attaches a reference point to the area on the plane corresponding to the raycast hit,
-            // and afterwards instantiates an instance of your chosen prefab at that point.
-            // This prefab instance is parented to the reference point to make sure the position of the prefab is consistent
-            // with the reference point, since a reference point attached to an ARPlane will be updated automatically by the ARReferencePointManager as the ARPlane's exact position is refined.
-            GameObject objectFound = GameObject.FindGameObjectWithTag("fourniture");
-            if (objectFound == null)
+            var touch = Input.GetTouch(0);
+            if (touch.phase != TouchPhase.Began)
+                return;
+
+            if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
             {
-                var referencePoint = m_ReferencePointManager.AttachReferencePoint(hitPlane, hitPose);
-                Instantiate(m_ReferencePointPrefab, referencePoint.transform);
+                // Raycast hits are sorted by distance, so the first one
+                // will be the closest hit.
+                var hitPose = s_Hits[0].pose;
+                var hitTrackableId = s_Hits[0].trackableId;
+                var hitPlane = m_PlaneManager.GetPlane(hitTrackableId);
 
-                if (referencePoint == null)
+                // This attaches a reference point to the area on the plane corresponding to the raycast hit,
+                // and afterwards instantiates an instance of your chosen prefab at that point.
+                // This prefab instance is parented to the reference point to make sure the position of the prefab is consistent
+                // with the reference point, since a reference point attached to an ARPlane will be updated automatically by the ARReferencePointManager as the ARPlane's exact position is refined.
+                GameObject objectFound = GameObject.FindGameObjectWithTag("fourniture");
+                if (objectFound == null)
                 {
-                    Debug.Log("Error creating reference point.");
+                    var referencePoint = m_ReferencePointManager.AttachReferencePoint(hitPlane, hitPose);
+                    Instantiate(m_ReferencePointPrefab[fournature.getselected()], referencePoint.transform);
+
+                    if (referencePoint == null)
+                    {
+                        Debug.Log("Error creating reference point.");
+                    }
+                    else
+                    {
+                        // Stores the reference point so that it may be removed later.
+                        m_ReferencePoints.Add(referencePoint);
+                        ColorButton.gameObject.SetActive(true);
+                        deletButton.gameObject.SetActive(true);
+                        //Maki
+                        Handheld.Vibrate();
+                    }
                 }
                 else
                 {
-                    // Stores the reference point so that it may be removed later.
-                    m_ReferencePoints.Add(referencePoint);
-                    ColorButton.gameObject.SetActive(true);
-                    //Maki
-                    Handheld.Vibrate();
+                    return;
                 }
-            }
-            else
-            {
-                return;
-            }
 
+            }
         }
+        else
+        {
+            // select item
+        }
+
+        // If there is no tap, then simply do nothing until the next call to Update().
+       
     }
 
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();

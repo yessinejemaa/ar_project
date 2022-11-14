@@ -7,12 +7,17 @@ using UnityEngine.SceneManagement;
 public class FournitureManager : MonoBehaviour
 {
 
-    public Button button;
+    public GameObject button;
+    public GameObject fournitureMenu;
+    public GameObject fournitureselection;
     public Button Colorbutton;
     public Material material1;
-  /*  public List<Material> material2;
-    public List<Material> material3;*/
-   
+    public Material material2;
+    public Material material3;
+    public Button deletButton;
+    /*  public List<Material> material2;
+      public List<Material> material3;*/
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +70,11 @@ public class FournitureManager : MonoBehaviour
         button.gameObject.SetActive(false);
         Colorbutton.gameObject.SetActive(false);
         Destroy(fourniture);
+        fournitureMenu.gameObject.SetActive(true);
+        fournitureselection.gameObject.SetActive(true);
+        deletButton.gameObject.SetActive(false);
+        ReferencePointCreator reference = new ReferencePointCreator();
+        reference.setObjectMethod();
     }
 
     public void ChangeColor()
@@ -75,6 +85,30 @@ public class FournitureManager : MonoBehaviour
             MeshRenderer fornitureMesh = fourniture.gameObject.GetComponent<MeshRenderer>();
             Debug.Log("change");
             fornitureMesh.materials[1].color = material1.color ;
+            //Maki
+            Handheld.Vibrate();
+        }
+    }
+    public void ChangeColorBlue()
+    {
+        GameObject fourniture = GameObject.FindGameObjectWithTag("fourniture");
+        if (fourniture != null)
+        {
+            MeshRenderer fornitureMesh = fourniture.gameObject.GetComponent<MeshRenderer>();
+            Debug.Log("change");
+            fornitureMesh.materials[1].color = material2.color;
+            //Maki
+            Handheld.Vibrate();
+        }
+    }
+    public void ChangeColorRed()
+    {
+        GameObject fourniture = GameObject.FindGameObjectWithTag("fourniture");
+        if (fourniture != null)
+        {
+            MeshRenderer fornitureMesh = fourniture.gameObject.GetComponent<MeshRenderer>();
+            Debug.Log("change");
+            fornitureMesh.materials[1].color = material3.color;
             //Maki
             Handheld.Vibrate();
         }
