@@ -5,21 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/First_scene.unity
     guid: 61c126ab4560b944294bebe07c5263e9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Measurement.unity
     guid: 3696dfd4ad4874e849aebadc47d90f30
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Screenshot2.unity
     guid: 648beaa2e59ed4be7bf1f8c637b4ead0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestCamera.unity
     guid: 79b471451a8ca4670bc6b383e2e49fcb
+  - enabled: 1
+    path: Assets/Scenes/tour.unity
+    guid: aedff5132fa464284912fc09505933ae
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}
