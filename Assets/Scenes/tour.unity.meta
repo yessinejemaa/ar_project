@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Scenes/tour.unity.meta
 guid: aedff5132fa464284912fc09505933ae
+=======
+guid: 57202892665adec4b90255dbbeedaa43
+folderAsset: yes
+>>>>>>> Stashed changes:Assets/StreamingAssets.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

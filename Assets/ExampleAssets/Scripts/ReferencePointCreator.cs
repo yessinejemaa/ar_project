@@ -57,7 +57,8 @@ public class ReferencePointCreator : MonoBehaviour
 
     void Update()
     {
-
+       
+      //  reference.setObjectMethod();
 
         if (setObject)
         {
@@ -83,8 +84,9 @@ public class ReferencePointCreator : MonoBehaviour
                 GameObject objectFound = GameObject.FindGameObjectWithTag("fourniture");
                 if (objectFound == null)
                 {
+                    FournitureSelection fourniture = new FournitureSelection();
                     var referencePoint = m_ReferencePointManager.AttachReferencePoint(hitPlane, hitPose);
-                    Instantiate(m_ReferencePointPrefab[fournature.getselected()], referencePoint.transform);
+                    Instantiate(m_ReferencePointPrefab[fourniture.getselected()], referencePoint.transform);
 
                     if (referencePoint == null)
                     {
